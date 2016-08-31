@@ -39,11 +39,15 @@
 #include "peaks/drums/high_hat.h"
 #include "peaks/modulations/bouncing_ball.h"
 #include "peaks/modulations/lfo.h"
-#include "peaks/modulations/mini_sequencer.h"
+//#include "peaks/modulations/mini_sequencer.h"
 #include "peaks/modulations/multistage_envelope.h"
 #include "peaks/number_station/number_station.h"
 #include "peaks/pulse_processor/pulse_shaper.h"
 #include "peaks/pulse_processor/pulse_randomizer.h"
+
+/* Beige Maze Processors */
+#include "peaks/modulations/beigemaze_sequencer.h"
+#include "peaks/modulations/beigemaze_rizm.h"
 
 #include "peaks/gate_processor.h"
 
@@ -60,7 +64,9 @@ enum ProcessorFunction {
   PROCESSOR_FUNCTION_PULSE_SHAPER,
   PROCESSOR_FUNCTION_PULSE_RANDOMIZER,
   PROCESSOR_FUNCTION_BOUNCING_BALL,
-  PROCESSOR_FUNCTION_MINI_SEQUENCER,
+//  PROCESSOR_FUNCTION_MINI_SEQUENCER,
+  PROCESSOR_FUNCTION_BEIGEMAZE_SEQUENCER,
+  PROCESSOR_FUNCTION_BEIGEMAZE_RIZM,
   PROCESSOR_FUNCTION_NUMBER_STATION,
   PROCESSOR_FUNCTION_LAST
 };
@@ -199,7 +205,9 @@ class Processors {
   DECLARE_BUFFERED_PROCESSOR(PulseShaper, pulse_shaper_);
   DECLARE_BUFFERED_PROCESSOR(PulseRandomizer, pulse_randomizer_);
   DECLARE_UNBUFFERED_PROCESSOR(BouncingBall, bouncing_ball_);
-  DECLARE_UNBUFFERED_PROCESSOR(MiniSequencer, mini_sequencer_);
+  DECLARE_UNBUFFERED_PROCESSOR(BeigeMazeSequencer, beigemaze_sequencer_); /* BeigeMaze */
+  DECLARE_UNBUFFERED_PROCESSOR(BeigeMazeRizm, beigemaze_rizm_); /* BeigeMaze */
+//  DECLARE_UNBUFFERED_PROCESSOR(MiniSequencer, mini_sequencer_); /* BeigeMaze */
   DECLARE_BUFFERED_PROCESSOR(NumberStation, number_station_);
   
   DISALLOW_COPY_AND_ASSIGN(Processors);
