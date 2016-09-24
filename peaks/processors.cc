@@ -60,9 +60,8 @@ Processors::callbacks_table_[PROCESSOR_FUNCTION_LAST] = {
   REGISTER_BUFFERED_PROCESSOR(PulseShaper)
   REGISTER_BUFFERED_PROCESSOR(PulseRandomizer)
   REGISTER_UNBUFFERED_PROCESSOR(BouncingBall)
+  REGISTER_UNBUFFERED_PROCESSOR(MiniSequencer)
   REGISTER_UNBUFFERED_PROCESSOR(BeigeMazeSequencer) /* BeigeMaze */
-  REGISTER_UNBUFFERED_PROCESSOR(BeigeMazeRizm) /* BeigeMaze */
-//  REGISTER_UNBUFFERED_PROCESSOR(MiniSequencer) /* BeigeMaze */
   REGISTER_BUFFERED_PROCESSOR(NumberStation)
 };
 
@@ -90,8 +89,7 @@ void Processors::Init(uint8_t index) {
   pulse_shaper_.Init();
   pulse_randomizer_.Init();
   beigemaze_sequencer_.Init(); /* BeigeMaze */
-  beigemaze_rizm_.Init(); /* BeigeMaze */
-  //mini_sequencer_.Init(); /* BeigeMaze */
+  mini_sequencer_.Init();
   number_station_.Init();
   number_station_.set_voice(index == 1);
   

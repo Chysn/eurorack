@@ -1,5 +1,13 @@
-#ifndef BEIGEMAZE_RIZM_H_
-#define BEIZEMZE_RIZM_H_
+/*
+ * BeigeMaze Rizm Sequencer
+ *
+ * Building blocks of rhythmic accent patterns
+ *
+ * To activate Rizm, include this file instead of mini_sequencer.h in processors.h
+ */
+
+#ifndef PEAKS_MODULATIONS_MINI_SEQUENCER_H_
+#define PEAKS_MODULATIONS_MINI_SEQUENCER_H_
 
 #include "stmlib/stmlib.h"
 #include <algorithm>
@@ -7,13 +15,13 @@
 
 namespace peaks {
 
-class BeigeMazeRizm {
+class MiniSequencer {
 	public:
-		BeigeMazeRizm() {
+		MiniSequencer() {
 			step_ = 0;
 		}
 
-		~BeigeMazeRizm() { }
+		~MiniSequencer() { }
   
 		void Init() {
 			std::fill(&values_[0], &values_[4], 0);
@@ -73,8 +81,7 @@ class BeigeMazeRizm {
 			}
 
 			/* Range-checking */
-			if (sum > 32767) {sum = 32767;}
-			if (sum < -32768) {sum = -32768;}
+			CLIP(sum);
 
 		    return static_cast<int16_t>(sum);
 		}
@@ -137,10 +144,10 @@ class BeigeMazeRizm {
             return pattern;
 		}
 
-		DISALLOW_COPY_AND_ASSIGN(BeigeMazeRizm);
+		DISALLOW_COPY_AND_ASSIGN(MiniSequencer);
 
-}; // class BeigeMazeRizm
+}; // class MiniSequencer
 
 }  // namespace peaks
 
-#endif  // BEIGEMAZE_RIZM_H_
+#endif  // PEAKS_MODULATIONS_MINI_SEQUENCER_H_

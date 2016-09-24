@@ -33,10 +33,11 @@ class BeigeMazeSequencer {
   
 		void Configure(uint16_t* parameter, ControlMode control_mode) {
 			if (control_mode == CONTROL_MODE_HALF) {
+				// In half mode, it's a two-step sequencer, or 4 steps if the alt trigger is used
 				set_step(0, parameter[0] - 32768);
 				set_step(1, parameter[1] - 32768);
-				set_step(2, -(parameter[0] - 32768));
-				set_step(3, -(parameter[1] - 32768));
+				set_step(2, parameter[0] - 32768);
+				set_step(3, parameter[1] - 32768);
 			} else {
 				set_step(0, parameter[0] - 32768);
 				set_step(1, parameter[1] - 32768);
