@@ -1,5 +1,5 @@
 /*
- * BeigeMaze Rizm Sequencer
+ * Beige Maze Rizm Sequencer
  *
  * Building blocks of rhythmic accent patterns
  *
