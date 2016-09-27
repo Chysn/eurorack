@@ -163,6 +163,7 @@ class Processors {
   }
   
   inline const NumberStation& number_station() const { return number_station_; }
+  inline BeigeMazeSequencer& beigemaze_sequencer() { return beigemaze_sequencer_; } /* BeigeMaze */
   
  private:
   void Configure() {

@@ -17,8 +17,10 @@ class BeigeMazeSequencer {
 		void Init() {
 			std::fill(&steps_[0], &steps_[8], 0);
 			std::fill(&last_parameter_[0], &last_parameter_[4], 0);
+			set_step(4, -32767); // Default to four-step sequence when activated
 			step_ = 0;
 			frame_ = 0;
+			sample_ = 0;
 		}
   
 		inline void set_step(uint8_t index, int16_t value) {
@@ -49,7 +51,17 @@ class BeigeMazeSequencer {
 
 			if (steps_[step_] < -32700) step_ = 0;
 
-			return peaks::chromatic_quantize(steps_[step_]);
+			sample_ = peaks::chromatic_quantize(steps_[step_]);
+			return sample_;
+		}
+
+		inline uint8_t getFrameLEDBrightness() {
+			return 64 * frame_;
+		}
+
+		inline uint8_t getNoteLEDBrightness() {
+			uint8_t brightness = (255 * (sample_ + BEIGEMAZE_CHROMATIC_VOLT)) / (BEIGEMAZE_CHROMATIC_VOLT * 2);
+			return brightness;
 		}
   
 	private:
@@ -57,6 +69,7 @@ class BeigeMazeSequencer {
 		int16_t steps_[8];
 		uint16_t last_parameter_[4];
 		int16_t frame_;
+		int16_t sample_;
 
 		DISALLOW_COPY_AND_ASSIGN(BeigeMazeSequencer);
 

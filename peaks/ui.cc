@@ -163,7 +163,6 @@ inline void Ui::RefreshLeds() {
       case FUNCTION_LFO:
       case FUNCTION_TAP_LFO:
       case FUNCTION_MINI_SEQUENCER:
-      case FUNCTION_BEIGEMAZE_SEQUENCER: /* BeigeMaze */
         {
           int32_t brightness = int32_t(brightness_[i]) * 409 >> 8;
           brightness += 32768;
@@ -178,6 +177,12 @@ inline void Ui::RefreshLeds() {
     }
   }
   
+  /* BeigeMaze */
+  if (function_[0] == FUNCTION_BEIGEMAZE_SEQUENCER) {
+	  b[0] = processors[0].beigemaze_sequencer().getNoteLEDBrightness();
+	  b[1] = processors[0].beigemaze_sequencer().getFrameLEDBrightness();
+  }
+
   if (processors[0].function() == PROCESSOR_FUNCTION_NUMBER_STATION) {
     leds_.set_pattern(
         processors[0].number_station().digit() ^ \
