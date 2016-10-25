@@ -14,6 +14,15 @@
 namespace peaks {
 
 class MiniSequencer {
+	private:
+    	uint8_t step_; /* The current step number */
+    	int16_t values_[16]; /* Values for each step */
+    	uint16_t num_steps_; /* Number of steps in the sequence */
+    	int16_t compose_; /* Value for compose voltage */
+    	int16_t decompose_; /* Value for decompose voltage */
+    	int8_t last_step_; /* Flag: Was the compose triggered during this step? */
+    	int16_t offset_; /* Value for offset voltage */
+
     public:
 		MiniSequencer() {
             Init();
@@ -98,15 +107,6 @@ class MiniSequencer {
             return static_cast<int32_t>(step_value) * 40960 >> 16;
         }
   
-    private:
-        uint8_t step_; /* The current step number */
-        int16_t values_[16]; /* Values for each step */
-        uint16_t num_steps_; /* Number of steps in the sequence */
-        int16_t compose_; /* Value for compose voltage */
-        int16_t decompose_; /* Value for decompose voltage */
-        int8_t last_step_; /* Flag: Was the compose triggered during this step? */
-        int16_t offset_; /* Value for offset voltage */
-
         DISALLOW_COPY_AND_ASSIGN(MiniSequencer);
 
 }; // class MiniSequencer
