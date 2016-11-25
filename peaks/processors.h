@@ -169,19 +169,37 @@ class Processors {
   void Configure() {
     if (function_ == PROCESSOR_FUNCTION_SNARE_DRUM ||
         function_ == PROCESSOR_FUNCTION_HIGH_HAT) {
-      uint16_t tone_parameter = control_mode_ == CONTROL_MODE_FULL
-          ? parameter_[1] : parameter_[0];
-      uint16_t snappy_parameter = control_mode_ == CONTROL_MODE_FULL
-          ? parameter_[2] : parameter_[1];
-      if (tone_parameter >= 65000 && snappy_parameter >= 65000) {
-        if (function_ != PROCESSOR_FUNCTION_HIGH_HAT) {
-          set_function(PROCESSOR_FUNCTION_HIGH_HAT);
-        }
-      } else if (tone_parameter <= 64500 || snappy_parameter <= 64500) {
+      /* The commented lines below serve to remove the high hat functionality from the Drum mode,
+       * because it is incompatible with the calibration routine added to this branch:
+       *
+       * pichenettes writes on Mutable Instruments forum:
+       * <<QUOTE
+	   * "Peaks’ drum synthesis code is so close to filling up the CPU that small changes in compiler versions
+	   * are enough to make the difference between 99.7% and 100.3% CPU used :)
+       *
+       * The “old” firmware (8173ac5c57d7c2c8bb04bbedb6696414b75b4cd2) does not do software offset compensation,
+       * the more recent does (6165129cd99416c762da3087594d9148e4c29222) – so the older version has more “margin”
+       * to tolerate variations in generated code efficiency.
+       *
+	   * To be on the safe side, stick with the exact same version I’m using for the production firmware,
+	   * 4.5.2. Or try different optimizer flags.
+	   *
+	   * I know it’s silly, but that’s what happens when I try to cram as many features as possible :)
+	   * UNQUOTE>>
+       */
+//        uint16_t tone_parameter = control_mode_ == CONTROL_MODE_FULL
+//            ? parameter_[1] : parameter_[0];
+//        uint16_t snappy_parameter = control_mode_ == CONTROL_MODE_FULL
+//            ? parameter_[2] : parameter_[1];
+//      if (tone_parameter >= 65000 && snappy_parameter >= 65000) {
+//    	  if (function_ != PROCESSOR_FUNCTION_HIGH_HAT) {
+//          set_function(PROCESSOR_FUNCTION_HIGH_HAT);
+//        }
+//      } else if (tone_parameter <= 64500 || snappy_parameter <= 64500) {
         if (function_ != PROCESSOR_FUNCTION_SNARE_DRUM) {
           set_function(PROCESSOR_FUNCTION_SNARE_DRUM);
         }
-      }
+//      }
     }
     (this->*callbacks_.configure)(&parameter_[0], control_mode_);
   }
